@@ -37,4 +37,24 @@ const getOISDataFromMainFloor = (list1: number[][]): number[] => {
  * 3.
  */
 
+type StationStatus = number;
+type Line = StationStatus[];
+
+const calculations_ANSWER = (plantLayout: Line[]): number[] => {
+  const stationsThatAreInputtingTooFast: number[] = [];
+
+  for (let i = 0; i < plantLayout.length; i++) {
+    const line = plantLayout[i];
+    const lastStationStatus = line[line.length - 1];
+    const QUEUED_STATION_STATUS = 4;
+
+    if (lastStationStatus == QUEUED_STATION_STATUS) {
+      const firstStation = line[0];
+      stationsThatAreInputtingTooFast.push(firstStation);
+    }
+  }
+
+  return stationsThatAreInputtingTooFast;
+};
+
 export {};
